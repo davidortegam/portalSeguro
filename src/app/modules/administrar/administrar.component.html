@@ -1,0 +1,132 @@
+<div class="contenedor">
+    <div class="marco">
+        <form [formGroup]="consultaFormGroup">
+            <div class="row">
+                <div class="col-sm">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Identificación</mat-label>
+                        <input type="text" matInput formControlName="documento">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Persona</mat-label>
+                        <input type="text" matInput formControlName="persona">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Ingresa un rango de fechas</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate placeholder="Inicio" formControlName="desde">
+                            <input matEndDate placeholder="Final" formControlName="hasta">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field color="warn" appearance="fill">
+                        <mat-label>Estado</mat-label>
+                        <mat-select formControlName="estado">
+                            <mat-option *ngFor="let opcion of opciones" [value]="opcion.Key">
+                                {{opcion.Value}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-1"><button class="btn btn-danger" (click)="buscar()" matTooltip="Buscar" matTooltipPosition="above"><mat-icon
+                            matListItemIcon>search</mat-icon></button></div>
+                <div class="col-sm-1"><button class="btn btn-success" (click)="exportExcel()" matTooltip="Descargar" matTooltipPosition="above"
+                        [disabled]="dataSource.data.length<=0"><mat-icon matListItemIcon>description</mat-icon></button>
+                </div>
+            </div>
+        </form>
+        <div class="row" *ngIf="dataSource.data.length>0">
+            <div class="col-sm form-group">
+                <div class="row">
+                    <mat-form-field color="warn" appearance="fill">
+                        <mat-label>Búsqueda filtrada</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Ingresa el texto a buscar" #input>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <table mat-table [dataSource]="dataSource" #table>
+            <ng-container matColumnDef="TIP_DOCUM">
+                <th mat-header-cell *matHeaderCellDef>TIPO</th>
+                <td mat-cell *matCellDef="let element">{{element.tip_docum}}</td>
+            </ng-container>
+            <ng-container matColumnDef="COD_DOCUM">
+                <th mat-header-cell *matHeaderCellDef>DOCUMENTO</th>
+                <td mat-cell *matCellDef="let element">{{element.cod_docum}}</td>
+            </ng-container>
+            <ng-container matColumnDef="PERSONA">
+                <th mat-header-cell *matHeaderCellDef>PERSONA</th>
+                <td mat-cell *matCellDef="let element">{{element.ape1_tercero+' '+element.ape2_tercero+'
+                    '+element.nom_tercero}}</td>
+            </ng-container>
+            <ng-container matColumnDef="EMAIL">
+                <th mat-header-cell *matHeaderCellDef>EMAIL</th>
+                <td mat-cell *matCellDef="let element">{{element.email}}</td>
+            </ng-container>
+            <ng-container matColumnDef="TLF_MOVIL">
+                <th mat-header-cell *matHeaderCellDef>TELÉFONO</th>
+                <td mat-cell *matCellDef="let element">{{element.tlf_movil}}</td>
+            </ng-container>
+            <ng-container matColumnDef="NOM_DOMICILIO">
+                <th mat-header-cell *matHeaderCellDef>DOMICILIO</th>
+                <td mat-cell *matCellDef="let element">{{element.nom_domicilio}}</td>
+            </ng-container>
+            <ng-container matColumnDef="MCA_ACEPTACION">
+                <th mat-header-cell *matHeaderCellDef>ESTADO</th>
+                <td mat-cell *matCellDef="let element">{{element.mca_aceptacion}}</td>
+            </ng-container>
+            <ng-container matColumnDef="FECHA_ACEPTACION">
+                <th mat-header-cell *matHeaderCellDef>ACEPTACIÓN</th>
+                <td mat-cell *matCellDef="let element">{{element.fecha_aceptacion | date:'dd-MM-yy'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="COD_USR_ACEPTACION">
+                <th mat-header-cell *matHeaderCellDef>USR CARGA</th>
+                <td mat-cell *matCellDef="let element">{{element.cod_usr_aceptacion}}</td>
+            </ng-container>
+            <ng-container matColumnDef="FUENTE">
+                <th mat-header-cell *matHeaderCellDef>FUENTE</th>
+                <td mat-cell *matCellDef="let element">{{element.fuente}}</td>
+            </ng-container>
+            <ng-container matColumnDef="FEC_BAJA">
+                <th mat-header-cell *matHeaderCellDef>FEC RECHAZO</th>
+                <td mat-cell *matCellDef="let element">{{element.fec_baja| date:'dd-MM-yy'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="COD_USR_BAJA">
+                <th mat-header-cell *matHeaderCellDef>USR RECHAZO</th>
+                <td mat-cell *matCellDef="let element">{{element.cod_usr_baja}}</td>
+            </ng-container>
+            <ng-container matColumnDef="OBSERVACION">
+                <th mat-header-cell *matHeaderCellDef>OBSERVACIÓN</th>
+                <td mat-cell *matCellDef="let element">{{element.observacion}}</td>
+            </ng-container>
+            <ng-container matColumnDef="ACCION">
+                <th mat-header-cell *matHeaderCellDef>ACCIÓN</th>
+                <td mat-cell *matCellDef="let element">
+                    <button *ngIf="element.mca_aceptacion == 'S'" (click)="openDialog(element);" class="boton-tabla"
+                        matTooltip="Dar de baja" matTooltipPosition="above"><mat-icon
+                            matListItemIcon>highlight_off</mat-icon></button>
+                    <button *ngIf="element.cod_docum_rp" (click)="representante(element);" class="boton-tabla"
+                        matTooltip="Representante legal" matTooltipPosition="above"><mat-icon
+                            matListItemIcon>perm_identity</mat-icon></button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="10">No se encontró información</td>
+            </tr>
+        </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 30, 50]" color="warn" showFirstLastButtons
+        aria-label="Select page of periodic elements">
+    </mat-paginator>

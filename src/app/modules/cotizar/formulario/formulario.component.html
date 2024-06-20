@@ -1,0 +1,423 @@
+<div class="">
+  <mat-stepper [linear]="false" color="warn" #stepper orientation="horizontal">
+    <mat-step [stepControl]="DatosAseguradoFormGroup" #Datos label="DATOS ASEGURADO">
+      <form [formGroup]="DatosAseguradoFormGroup">
+        <div class="row d-flex p-1">
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field color="warn" appearance="outline" class="w-100">
+              <mat-label>Tipo de documento</mat-label>
+              <mat-select formControlName="tip_docum">
+                <mat-option *ngFor="let opcion of tipoDocumento" [value]="opcion.Key">
+                  {{opcion.Value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4" *ngIf="(DatosAseguradoFormGroup.controls['tip_docum'].value) == 'CI'">
+            <mat-form-field color="warn" appearance="outline" class="w-100">
+              <mat-label>Código de documento</mat-label>
+              <input matInput type="text" maxlength="10" formControlName="cod_docum" (change)="cargarTercero()">
+              <mat-hint align="end">{{DatosAseguradoFormGroup.controls['cod_docum'].value!.length}} / 10</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4" *ngIf="(DatosAseguradoFormGroup.controls['tip_docum'].value) == 'PS'">
+            <mat-form-field color="warn" appearance="outline" class="w-100">
+              <mat-label>Código de documento</mat-label>
+              <input matInput type="text" maxlength="20" formControlName="cod_docum" (change)="cargarTercero()">
+              <mat-hint align="end">{{DatosAseguradoFormGroup.controls['cod_docum'].value!.length}} / 20</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4" *ngIf="(DatosAseguradoFormGroup.controls['tip_docum'].value) == 'RUC'">
+            <mat-form-field color="warn" appearance="outline" class="w-100">
+              <mat-label>Código de documento</mat-label>
+              <input matInput type="text" maxlength="13" formControlName="cod_docum" (change)="cargarTercero()">
+              <mat-hint align="end">{{DatosAseguradoFormGroup.controls['cod_docum'].value!.length}} / 13</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Nombres</mat-label>
+              <input matInput type="text" formControlName="nom_tercero">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Apellido paterno</mat-label>
+              <input matInput type="text" formControlName="ape1_tercero">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Apellido materno</mat-label>
+              <input matInput type="text" formControlName="ape2_tercero">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field color="warn" appearance="outline" class="w-100">
+              <mat-label>Fecha de nacimiento</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="fec_nacimiento" readonly>
+              <!-- <mat-hint>DD/MM/YYYY</mat-hint> -->
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Género</mat-label>
+              <mat-select formControlName="sexo">
+                <mat-option *ngFor="let genero of generos" [value]="genero.Key" (onSelectionChange)="onSelectionGenero(genero,$event)">
+                  {{genero.Value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Teléfono</mat-label>
+              <input matInput type="text" formControlName="tlf_numero">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput type="text" formControlName="email">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Provincia</mat-label>
+              <mat-select formControlName="provincia">
+                <mat-option *ngFor="let opcion of provincias" [value]="opcion.Key"
+                  (onSelectionChange)="onSelectionChangeProvincia(opcion,$event)">
+                  {{opcion.Value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Ciudad</mat-label>
+              <mat-select formControlName="ciudad">
+                <mat-option *ngFor="let opcion of ciudad" [value]="opcion.Key"
+                  (onSelectionChange)="onSelectionChangeCiudad(opcion,$event)">
+                  {{opcion.Value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Parroquia</mat-label>
+              <mat-select formControlName="parroquia">
+                <mat-option *ngFor="let opcion of parroquia" [value]="opcion.Key"
+                (onSelectionChange)="onSelectionChangeParroquia(opcion,$event)">
+                  {{opcion.Value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-12">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Dirección principal</mat-label>
+              <textarea matInput type="text" maxlength="120" rows="1" formControlName="direccion" #direccion></textarea>
+              <mat-hint align="end">{{direccion.value.length}} / 120</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field color="warn" appearance="outline" class="w-100">
+              <mat-label>¿Practica deportes extremos?</mat-label>
+              <mat-select formControlName="depExt">
+                <mat-option *ngFor="let opcion of opciones" [value]="opcion.Key">
+                  {{opcion.Value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Ocupación</mat-label>
+              <input type="text" matInput formControlName="ocupacion" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarTextoCombo2">
+                <mat-option *ngFor="let option of filteredOcp | async" [value]="option"
+                  (onSelectionChange)="verRiesgos(option,$event)">
+                  {{option.VALUE}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4" hidden>
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Nivel de riesgo</mat-label>
+              <input matInput type="text" formControlName="nivelRiesgo" readonly>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="container-fluid" *ngIf="riesgo != ''" hidden>
+          <div class="card">
+            <div class="card-body">
+              <div class="row mapfre p-1">
+                <div class="col-4 text-center mapfre fw-bold">
+                  TIPO DE RIESGO
+                </div>
+                <div class="col-8 text-center mapfre-riesgos fw-bold">
+                  DESCRIPCION DE ACTIVIDADES
+                </div>
+              </div>
+              <div class="row p-1" *ngIf="riesgo == 'A'">
+                <div class="col-4 mapfre-tipo-riesgo">
+                  RIESGO A
+                </div>
+                <div class="col-8 descripcion">
+                  Oficinistas, Gerentes de oficina, Abogados, Administradores (oficina), Agencias de créditos (no
+                  banco),
+                  Agencias de empleo, Agencias de viaje, Agente/corredor de bolsa o corredor de seguros, Ama de casa,
+                  Analistas,
+                  Arquitecto, Bancos, Chofer particular, Cosmetólogo, Contador, Dentista, Diseñador, Enfermera,
+                  Economista,
+                  Fotógrafo, Fisiqoterapista, Profesores, Médicos, vendedores comerciales (que no realizan entregas a
+                  domicilio)
+                </div>
+              </div>
+              <div class="row p-1" *ngIf="riesgo == 'B'">
+                <div class="col-4 mapfre-tipo-riesgo">
+                  RIESGO B
+                </div>
+                <div class="col-8 descripcion">
+                  Agricultor, Artistas, Bodeguero, Carpintero, Conductores de taxi, Contrastista (en instalaciones
+                  propias),
+                  Electricista, Estudiantes, Entrenadores, Instructores, Granjeros (no manual) , Industrias de Bebidas o
+                  comida,
+                  Jardinero, Pintor, Vendedorres que viajan, Restaurantes, Plomería, Personal de lavandería, servicios
+                  de
+                  comunicación, maestros de obra, ingenieros civiles o eléctricos.
+                </div>
+              </div>
+              <div class="row p-1" *ngIf="riesgo == 'C'">
+                <div class="col-4 mapfre-tipo-riesgo">
+                  RIESGO C
+                </div>
+                <div class="col-8 descripcion">
+                  Albañil, Alfarería, Construcción, Operador de Grúa, Soldador, Trabajadores industriales que usan
+                  maquinaria
+                  pesada, Negociante de Ganado, Industria pesquera, Fabricación de Hierro, choferes profesionales,
+                  veterinarios
+                  que trabajan en campo.
+                </div>
+              </div>
+              <div class="row p-1" *ngIf="riesgo == 'D'">
+                <div class="col-4 mapfre-tipo-riesgo">
+                  RIESGO D
+                </div>
+                <div class="col-8 descripcion">
+                  Buceo y actividades relacionadas, Deportistas profesionales, Pilotos de aviones o avionetas, Personal
+                  de las
+                  fuerzas armadas, Políticos.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button color="primary" mat-raised-button
+          (click)="DatosAseguradoFormGroup.reset();DatosAseguradoFormGroup.controls['cod_docum'].setValue('')">Limpiar</button>
+        <button class="float-end" color="warn" mat-raised-button [disabled]="!DatosAseguradoFormGroup.valid"
+          matStepperNext>Siguiente</button>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="DATOS BRÓKER">
+      <form [formGroup]="secondFormGroup">
+        <div class="row d-flex p-1">
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Nombre de bróker</mat-label>
+              <input type="text" matInput formControlName="broker" [matAutocomplete]="broker">
+              <mat-autocomplete #broker="matAutocomplete" [displayWith]="mostrarTextoCombo">
+                <mat-option *ngFor="let option of filteredBroker | async" [value]="option"
+                  (onSelectionChange)="onSelectionChangeBroker(option,$event)">
+                  {{option.Value}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Ejecutivo Mapfre</mat-label>
+              <input type="text" matInput formControlName="ejecutivo" [matAutocomplete]="ejecutivo">
+              <mat-autocomplete #ejecutivo="matAutocomplete" [displayWith]="mostrarTextoCombo">
+                <mat-option *ngFor="let option of filteredEjec | async" [value]="option"
+                (onSelectionChange)="onSelectionChangeEjecutivo(option,$event)">
+                  {{option.Value}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Oficina Comercial</mat-label>
+              <mat-select formControlName="oficina">
+                <mat-option *ngFor="let opcion of oficinas" [value]="opcion.Key">
+                  {{opcion.Value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <button class="float-start" color="warn" mat-raised-button matStepperPrevious>Atrás</button>
+        <button style="margin-left: 20px;" color="primary" mat-raised-button
+          (click)="secondFormGroup.reset()">Limpiar</button>
+        <button class="float-end" color="warn" mat-raised-button [disabled]="!secondFormGroup.valid"
+          matStepperNext>Siguiente</button>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" label="COBERTURAS Y COSTOS">
+      <form [formGroup]="thirdFormGroup">
+        <div class="example-container">
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="cobertura">
+              <th mat-header-cell *matHeaderCellDef>Cobertura</th>
+              <td mat-cell *matCellDef="let element"> {{element.cobertura}} </td>
+            </ng-container>
+            <ng-container matColumnDef="suma">
+              <th mat-header-cell *matHeaderCellDef>Suma Asegurada</th>
+              <td mat-cell *matCellDef="let element">
+                <input class="inputC" type="text" matInput placeholder="$ 0.00" (change)="asignarSuma($event,element)"
+                  (focus)="sumaFormat($event,element)" (blur)="sumaBlur($event,element)">
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="tasa">
+              <th mat-header-cell *matHeaderCellDef>Tasa</th>
+              <!-- <td mat-cell *matCellDef="let element"> <div class="inputC">{{element.tasa.toFixed(2)}}%</div></td> -->
+              <td mat-cell *matCellDef="let element">
+
+                <input class="inputC" type="number" matInput placeholder="% 0.00" matTooltipPosition="above"
+                  (change)="asignarTasa($event,element)">
+
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="primaNetaAnual">
+              <th mat-header-cell *matHeaderCellDef>Prima Neta Anual</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="inputC">$ {{element.primaNetaAnual.toFixed(2)}}</div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="10">No se encontró información</td>
+            </tr>
+          </table>
+        </div>
+        <!-- <div class="row mt-5">
+          <div class="col-sm-3">
+            <mat-form-field color="warn" appearance="outline" class="w-100" matTooltip="Máximo 20%"
+              matTooltipPosition="above">
+              <mat-label>% Recargo(+)</mat-label>
+              <input matInput type="number" formControlName="recargo" (change)="changeRecargoDescuento()"
+                placeholder="0">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-3">
+            <mat-form-field color="warn" appearance="outline" class="w-100" matTooltip="Máximo 5%"
+              matTooltipPosition="above">
+              <mat-label>% Descuento(-)</mat-label>
+              <input matInput type="number" formControlName="descuento" (change)="changeRecargoDescuento()"
+                placeholder="0">
+            </mat-form-field>
+          </div>
+        </div> -->
+        <div class="container w-50 float-end">
+          <div class="row" style="text-align: start;">
+            <div class="col-sm-12">
+              <h2 class="total">Prima neta: <span class="float-end">${{primaNeta.toFixed(2)}}</span></h2>
+            </div>
+            <!-- <div class="col-sm-12">
+              <h2 class="total">Descuentos y/o recargos:<span class="float-end">${{impuestosRecargos.toFixed(2)}}</span>
+              </h2>
+            </div>
+            <div class="col-sm-12">
+              <h2 class="total">Prima neta total:<span class="float-end">${{primaTotal.toFixed(2)}}</span></h2>
+            </div> -->
+          </div>
+        </div>
+      </form>
+      <div class="container d-flex">
+        <div class="col-sm">
+          <button class="float-start" color="warn" mat-raised-button matStepperPrevious>Atrás</button>
+        </div>
+        <div class="col-sm">
+          <button class="float-end" color="warn" mat-raised-button [disabled]="!thirdFormGroup.valid"
+            matStepperNext>Siguiente</button>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="fourFormGroup" label="DATOS POLIZA">
+      <form [formGroup]="fourFormGroup">
+        <div class="row d-flex p-1">
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field color="warn" appearance="outline" class="w-100">
+              <mat-label>Desde</mat-label>
+              <input matInput [matDatepicker]="picker3" formControlName="desde" (dateChange)="addEvent($event)" readonly>
+              <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field color="warn" appearance="outline" class="w-100">
+              <mat-label>Hasta</mat-label>
+              <input matInput formControlName="hasta" readonly>
+              <mat-datepicker-toggle matIconSuffix [for]="picker2" disabled="true"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Forma de pago</mat-label>
+              <mat-select formControlName="forma_pago">
+                <mat-option *ngFor="let formaPago of formaPago" [value]="formaPago.Key"
+                (onSelectionChange)="onSelectionChangeFormaPago(formaPago,$event)">
+                  {{formaPago.Value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Financiación</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let formaPago of metodosPago" [value]="formaPago.Key">
+                  {{formaPago.Value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> -->
+          <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <!-- <mat-label>Prima incluidos impuestos</mat-label> -->
+              <mat-label>Prima Neta</mat-label>
+              <input matInput type="number" [value]="primaTotal.toFixed(2)" readonly>
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Prima financiada</mat-label>
+              <input matInput type="text" #inputText>
+            </mat-form-field>
+          </div> -->
+          <!-- <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Cuota inicial</mat-label>
+              <input matInput type="text" #inputText>
+            </mat-form-field>
+          </div> -->
+          <!-- <div class="col-sm-6 col-md-4">
+            <mat-form-field appearance="outline" color="warn" class="w-100">
+              <mat-label>Cuota mensual</mat-label>
+              <input matInput type="text" #inputText>
+            </mat-form-field>
+          </div> -->
+        </div>
+        <button class="float-start" color="warn" mat-raised-button matStepperPrevious>Atrás</button>
+        <button class="float-end" color="warn" mat-raised-button [disabled]="!fourFormGroup.valid" (click)="cotizar()">Cotizar</button>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</div>

@@ -1,0 +1,88 @@
+.custom-header {
+    background-color: #da2d25;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+::ng-deep .mat-expansion-indicator:after {
+    color: white;
+}
+
+
+/* Table's styles */
+/* th,
+td {
+    overflow-wrap: break-word;
+    width: 150px;
+} */
+
+.mdc-data-table__header-cell {
+    color: #da2d25;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: left;
+    background-color: rgb(230, 230, 230) !important;
+}
+
+.table-container {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.mat-header-row,
+.mat-row {
+    display: flex;
+}
+
+
+.acciones-cell {
+    min-width: 70px;
+}
+
+.proceso-cell {
+    min-width: 150px;
+}
+
+.area-cell {
+    min-width: 150px;
+}
+
+.departamento-cell {
+    min-width: 180px;
+}
+
+.codigo-cell {
+    min-width: 100px;
+}
+
+.macroproceso-cell {
+    min-width: 180px;
+}
+
+.solicitanteact-cell {
+    min-width: 180px;
+}
+
+.documento-cell {
+    min-width: 300px;
+}
+
+.version-cell {
+    min-width: 100px;
+}
+
+.fecha-creacion-cell {
+    justify-content: center;
+    min-width: 150px;
+}
+
+.fecha-actualizacion-cell {
+    min-width: 190px;
+}
+
+.link-style {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

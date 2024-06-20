@@ -1,0 +1,19 @@
+<h1 mat-dialog-title class="m-3 text-danger"><strong>Rechazar consentimiento</strong></h1>
+<div mat-dialog-content class="modal">
+    <h3>Ingresa observación</h3>
+    <div class="w-100">
+        <mat-form-field appearance="outline" color="warn" class="w-100">
+          <mat-label>Observación</mat-label>
+          <textarea matInput type="text" maxlength="300" rows="6" #observacion></textarea>
+          <mat-hint align="end">{{observacion.value.length}} / 300</mat-hint>
+        </mat-form-field>
+      </div>
+    <!-- <h3>Adjunta sustento</h3>
+    <div class="w-100 form-group">
+        <input type="file" class="form-control" placeholder="Subir archivo"
+            multiple="false">
+    </div> -->
+</div>
+<div mat-dialog-actions class="m-3">
+    <button class="btn btn-danger w-100" (click)="Baja(observacion.value)">Registrar rechazo</button>
+</div>

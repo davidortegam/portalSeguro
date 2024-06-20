@@ -1,0 +1,347 @@
+<div class="contenedor">
+    <div class="marco">
+        <div>
+            <div class="row">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState" (closed)="panelOpenState" [expanded]="true">
+                        <mat-expansion-panel-header style="background-color: #da2d25;" [collapsedHeight]="'40px'"
+                            [expandedHeight]="'48px'">
+                            <mat-panel-title style="color: white;">
+                                Búsquedad
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="m-2">
+                            <form [formGroup]="searchFormGroup">
+                                <div class="row align-items-center">
+                                    <div [ngClass]="classGrid">
+                                        <mat-form-field class="w-100" color="warn" appearance="fill">
+                                            <mat-label>Proceso</mat-label>
+                                            <mat-select formControlName="proceso"
+                                                (valueChange)="handleChangeProceso($event)">
+                                                <mat-option [value]="allProceso">
+                                                    TODOS
+                                                </mat-option>
+                                                <mat-option *ngFor="let proceso of listaProcesos"
+                                                    [value]="proceso.COD_PROCESO">
+                                                    {{proceso.NOM_PROCESO}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div [ngClass]="classGrid">
+                                        <mat-form-field class="w-100" color="warn" appearance="fill">
+                                            <mat-label>Macroproceso</mat-label>
+                                            <mat-select formControlName="macroProceso">
+                                                <mat-option [value]="allMacroproceso">
+                                                    TODOS
+                                                </mat-option>
+                                                <mat-option *ngFor="let macroProceso of listaMacroprocesosFiltrada"
+                                                    [value]="macroProceso.COD_MACROPROCESO">
+                                                    {{macroProceso.NOM_MACROPROCESO}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div *ngIf="user === 'DEFAULT'" class="col-md-4 col-sm-6 pt-3">
+                                        <mat-form-field class="w-100" color="warn" appearance="fill">
+                                            <mat-label>Tipos de Documentos</mat-label>
+                                            <mat-select formControlName="tipoDocumentos" required>
+                                                <mat-option [value]="allTiposDocumento">
+                                                    TODOS
+                                                </mat-option>
+                                                <mat-option *ngFor="let opcion of listaTipoDocumentoFiltrada"
+                                                    [value]="opcion.COD_TIPO_DOCUMENTO">
+                                                    {{opcion.NOM_TIPO_DOCUMENTO}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div *ngIf="user !== 'DEFAULT'" class="col-md-3 col-sm-6 col-xs-12 pt-3">
+                                        <mat-form-field class="w-100" appearance="fill" color="warn">
+                                            <mat-label>Area</mat-label>
+                                            <mat-select formControlName="area"
+                                                (valueChange)="handleChangeArea($event)">
+                                                <mat-option [value]="allAreas">
+                                                    TODOS
+                                                </mat-option>
+                                                <mat-option *ngFor="let area of listaAreas" [value]="area.COD_AREA">
+                                                    {{area.NOM_AREA}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div *ngIf="user !== 'DEFAULT'" class="col-md-3 col-sm-6 col-xs-12 pt-3">
+                                        <mat-form-field class="w-100" appearance="fill" color="warn">
+                                            <mat-label>Departamento</mat-label>
+                                            <mat-select formControlName="departamento">
+                                                <mat-option [value]="allDepartamentos">
+                                                    TODOS
+                                                </mat-option>
+                                                <mat-option *ngFor="let dep of listaDepartamentosFiltrada" [value]="dep.COD_DEPARTAMENTO">
+                                                    {{dep.NOM_DEPARTAMENTO}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div *ngIf="user !== 'DEFAULT'" class="row align-items-center">
+                                    <div class="col-md-2 col-sm-3 col-xs-12 pt-3">
+                                        <mat-form-field class="w-100" appearance="fill" color="warn">
+                                            <mat-label>Código</mat-label>
+                                            <input type="text" matInput formControlName="codigoRef">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4 col-sm-9 col-xs-12 pt-3">
+                                        <mat-form-field class="w-100" appearance="fill" color="warn">
+                                            <mat-label>Nombre Documento</mat-label>
+                                            <input type="text" matInput formControlName="nombreDocumento">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <div class="card flex justify-content-center">
+                                            <mat-form-field appearance="fill" color="warn">
+                                                <mat-label>Fecha de Creación</mat-label>
+                                                <mat-date-range-input [rangePicker]="pickerCreacion">
+                                                    <input matStartDate placeholder="Inicio"
+                                                        formControlName="fechaCreacionDesde">
+                                                    <input matEndDate placeholder="Final"
+                                                        formControlName="fechaCreacionhasta">
+                                                </mat-date-range-input>
+                                                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                                                <mat-datepicker-toggle matIconSuffix
+                                                    [for]="pickerCreacion"></mat-datepicker-toggle>
+                                                <mat-date-range-picker #pickerCreacion></mat-date-range-picker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <div class="card flex justify-content-center">
+                                            <mat-form-field appearance="fill" color="warn">
+                                                <mat-label>Fecha de Actualización</mat-label>
+                                                <mat-date-range-input [rangePicker]="pickerActualizacion">
+                                                    <input matStartDate placeholder="Inicio"
+                                                        formControlName="fechaActualizacionDesde">
+                                                    <input matEndDate placeholder="Final"
+                                                        formControlName="fechaActualizacionhasta">
+                                                </mat-date-range-input>
+                                                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                                                <mat-datepicker-toggle matIconSuffix
+                                                    [for]="pickerActualizacion"></mat-datepicker-toggle>
+                                                <mat-date-range-picker #pickerActualizacion></mat-date-range-picker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 pt-3">
+                                    <mat-form-field class="w-100" appearance="fill" color="warn">
+                                        <mat-label>Palabras Claves</mat-label>
+                                        <input (keyup)="keyWordFilter($event)" type="text" matInput formControlName="palabrasClaves">
+                                        <mat-hint>Ej: #emision #cotizacion #cobranzas #suscriptor</mat-hint>
+                                    </mat-form-field>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col-md-2 col-sm-4 col-xs-12 mt-3  ms-auto">
+                                        <p-button (onClick)="clearScreen()" styleClass="w-100" label="Limpiar"
+                                            icon="pi pi-eraser"></p-button>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-12 mt-3">
+                                        <p-button (onClick)="Buscar()" styleClass="w-100" label="Buscar"
+                                            icon="pi pi-search"></p-button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+            <div class="row mt-2">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState" (closed)="panelOpenState" [expanded]="true">
+                        <mat-expansion-panel-header style="background-color: #da2d25;" [collapsedHeight]="'40px'"
+                            [expandedHeight]="'48px'">
+                            <mat-panel-title style="color: white;">
+                                Documentos
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="m-2">
+                            <div class="row align-items-center" *ngIf="user !== 'DEFAULT'">
+                                <div class="col-md-2 col-sm-4 col-xs-3 mb-1 pt-1 pb-1 pl-2 pr-2 ms-auto">
+                                    <p-button 
+                                        label="EXCEL" 
+                                        icon="pi pi-file-excel" 
+                                        severity="success" 
+                                        styleClass="w-100"
+                                        [disabled]="data.data.length === 0"
+                                        (onClick)="exportToExcel()">
+                                    </p-button>
+                                </div>
+                            </div>
+                            <div class="table-container">
+                                <table mat-table [dataSource]="data" #table>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                    <ng-container matColumnDef="ACCIONES">
+                                        <th class="acciones-cell" mat-header-cell *matHeaderCellDef>Acciones</th>
+                                        <td class="acciones-cell" mat-cell *matCellDef="let element">
+                                            <p-button 
+                                                (onClick)="goToEdit(element.CODIGO)" 
+                                                icon="pi pi-pen-to-square"
+                                                [text]="true"
+                                            >
+                                            </p-button>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="NOM_PROCESO">
+                                        <th class="proceso-cell" mat-header-cell *matHeaderCellDef>Proceso</th>
+                                        <td class="proceso-cell" mat-cell *matCellDef="let element">
+                                            {{element.NOM_PROCESO}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="AREA">
+                                        <th class="area-cell" mat-header-cell *matHeaderCellDef>Area</th>
+                                        <td class="area-cell" mat-cell *matCellDef="let element">{{element.AREA}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="DEPARTAMENTO">
+                                        <th class="departamento-cell" mat-header-cell *matHeaderCellDef>Departamento
+                                        </th>
+                                        <td class="departamento-cell" mat-cell *matCellDef="let element">
+                                            {{element.DEPARTAMENTO}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="CODIGO">
+                                        <th class="codigo-cell" mat-header-cell *matHeaderCellDef>Código</th>
+                                        <td class="codigo-cell" mat-cell *matCellDef="let element">{{element.CODIGO_REF}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="NOM_MACROPROCESO">
+                                        <th class="macroproceso-cell" mat-header-cell *matHeaderCellDef>Macroproceso
+                                        </th>
+                                        <td class="macroproceso-cell" mat-cell *matCellDef="let element">
+                                            {{element.NOM_MACROPROCESO}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="NOMBRE_DOCUMENTO">
+                                        <th class="documento-cell" mat-header-cell *matHeaderCellDef>Documento</th>
+                                        <td class="documento-cell" mat-cell *matCellDef="let element">
+                                            <p class="link-style"
+                                                (click)="downloadFile(element.CODIGO, element.NOMBRE_DOCUMENTO)">
+                                                {{element.NOMBRE_DOCUMENTO}}</p>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="VERSION_DOCUMENTO">
+                                        <th class="version-cell" mat-header-cell *matHeaderCellDef>Versión</th>
+                                        <td class="version-cell" mat-cell *matCellDef="let element">
+                                            {{element.VERSION_DOCUMENTO}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="FECHA_CREACION">
+                                        <th mat-header-cell *matHeaderCellDef class="fecha-creacion-cell">Fecha Creación
+                                        </th>
+                                        <td mat-cell *matCellDef="let element" class="fecha-creacion-cell">
+                                            {{element.FECHA_CREACION}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="SOLICITANTE_ACT">
+                                        <th class="solicitanteact-cell" mat-header-cell *matHeaderCellDef>
+                                            Solicitante de Actualización
+                                        </th>
+                                        <td class="solicitanteact-cell" mat-cell *matCellDef="let element">
+                                            {{element.SOLICITANTE_ACT}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="FECHA_ACTUALIZACION">
+                                        <th mat-header-cell *matHeaderCellDef class="fecha-actualizacion-cell">Fecha
+                                            Actualización</th>
+                                        <td mat-cell *matCellDef="let element" class="fecha-actualizacion-cell">
+                                            <p style="cursor: pointer; margin-top: 12.5px;"
+                                                (click)="showDialog(element.CODIGO, element.NOMBRE_DOCUMENTO)">
+                                                {{element.FECHA_ACTUALIZACION}}</p>
+                                        </td>
+                                    </ng-container>
+                                    <tr class="mat-row" *matNoDataRow>
+                                        <td class="mat-cell" colspan="10" rowspan="10">
+                                            <div >
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px"
+                                                    y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100"
+                                                    xml:space="preserve" style="fill: #918e8e;">
+                                                    <path
+                                                        d="M74.815,41.455V29.33c0-4.136-3.364-7.5-7.5-7.5H52.255l-8.001-7H13.149c-4.136,0-7.5,3.364-7.5,7.5v38.168  c0,4.136,3.364,7.5,7.5,7.5h37.878C53.205,77.809,61.97,85.17,72.427,85.17c12.089,0,21.924-9.835,21.924-21.924  C94.351,51.965,85.784,42.649,74.815,41.455z M50.51,62.998h-37.36c-1.379,0-2.5-1.121-2.5-2.5V22.33c0-1.379,1.121-2.5,2.5-2.5  h29.226l8.001,7h16.939c1.379,0,2.5,1.121,2.5,2.5v12.153C59.034,42.77,50.634,51.905,50.51,62.998z M72.427,80.17  c-9.332,0-16.924-7.592-16.924-16.924s7.592-16.924,16.924-16.924s16.924,7.592,16.924,16.924S81.759,80.17,72.427,80.17z   M72.315,51.111c-1.381,0-2.5,1.119-2.5,2.5v10.333c0,1.381,1.119,2.5,2.5,2.5s2.5-1.119,2.5-2.5V53.611  C74.815,52.23,73.696,51.111,72.315,51.111z M72.315,68.944c-1.381,0-2.5,1.119-2.5,2.5v0.167c0,1.381,1.119,2.5,2.5,2.5  s2.5-1.119,2.5-2.5v-0.167C74.815,70.063,73.696,68.944,72.315,68.944z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                No hay información
+                                            </div>
+                                            
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <mat-paginator [pageSizeOptions]="[10, 30, 50]" color="warn" showFirstLastButtons
+                                aria-label="Select page of periodic elements">
+                            </mat-paginator>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<p-dialog header={{nombreDocumentoVersion}} [(visible)]="visible" [modal]="true" [style]="{ width: '60rem' }">
+    <div class="table-container">
+        <table mat-table [dataSource]="dataVersion">
+            <tr mat-header-row *matHeaderRowDef="displayedVersionColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedVersionColumns;"></tr>
+            <ng-container matColumnDef="NOMBRE_DOCUMENTO">
+                <th class="documento-cell" mat-header-cell *matHeaderCellDef>Documento</th>
+                <td class="documento-cell" mat-cell *matCellDef="let element">
+                    <p class="link-style"
+                        (click)="downloadFileVersion(element.NOMBRE_DOCUMENTO, element.VERSION_DOCUMENTO)">
+                        {{element.NOMBRE_DOCUMENTO}}</p>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="VERSION_DOCUMENTO">
+                <th class="version-cell" mat-header-cell *matHeaderCellDef>Versión</th>
+                <td class="version-cell" mat-cell *matCellDef="let element">
+                    {{element.VERSION_DOCUMENTO}}</td>
+            </ng-container>
+            <ng-container matColumnDef="SOLICITANTE_ACT">
+                <th class="solicitanteact-cell" mat-header-cell *matHeaderCellDef>
+                    Solicitante de Actualización
+                </th>
+                <td class="solicitanteact-cell" mat-cell *matCellDef="let element">
+                    {{element.SOLICITANTE_ACT}}</td>
+            </ng-container>
+            <ng-container matColumnDef="RESPONSABLE_AUT">
+                <th class="solicitanteact-cell" mat-header-cell *matHeaderCellDef>
+                    Responsable Autorización
+                </th>
+                <td class="solicitanteact-cell" mat-cell *matCellDef="let element">
+                    {{element.RESPONSABLE_AUT}}</td>
+            </ng-container>
+            <ng-container matColumnDef="FECHA_ACTUALIZACION">
+                <th mat-header-cell *matHeaderCellDef class="fecha-actualizacion-cell">Fecha
+                    Actualización</th>
+                <td mat-cell *matCellDef="let element" class="fecha-actualizacion-cell">
+                    <p>{{element.FECHA_ACTUALIZACION}}</p>
+                </td>
+            </ng-container>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="10" rowspan="10">
+                    <div >
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px"
+                            y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100"
+                            xml:space="preserve" style="fill: #918e8e;">
+                            <path
+                                d="M74.815,41.455V29.33c0-4.136-3.364-7.5-7.5-7.5H52.255l-8.001-7H13.149c-4.136,0-7.5,3.364-7.5,7.5v38.168  c0,4.136,3.364,7.5,7.5,7.5h37.878C53.205,77.809,61.97,85.17,72.427,85.17c12.089,0,21.924-9.835,21.924-21.924  C94.351,51.965,85.784,42.649,74.815,41.455z M50.51,62.998h-37.36c-1.379,0-2.5-1.121-2.5-2.5V22.33c0-1.379,1.121-2.5,2.5-2.5  h29.226l8.001,7h16.939c1.379,0,2.5,1.121,2.5,2.5v12.153C59.034,42.77,50.634,51.905,50.51,62.998z M72.427,80.17  c-9.332,0-16.924-7.592-16.924-16.924s7.592-16.924,16.924-16.924s16.924,7.592,16.924,16.924S81.759,80.17,72.427,80.17z   M72.315,51.111c-1.381,0-2.5,1.119-2.5,2.5v10.333c0,1.381,1.119,2.5,2.5,2.5s2.5-1.119,2.5-2.5V53.611  C74.815,52.23,73.696,51.111,72.315,51.111z M72.315,68.944c-1.381,0-2.5,1.119-2.5,2.5v0.167c0,1.381,1.119,2.5,2.5,2.5  s2.5-1.119,2.5-2.5v-0.167C74.815,70.063,73.696,68.944,72.315,68.944z" />
+                        </svg>
+                    </div>
+                    No hay información
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- <mat-paginator [pageSizeOptions]="[10, 30, 50]" color="warn" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+    </mat-paginator> -->
+</p-dialog>

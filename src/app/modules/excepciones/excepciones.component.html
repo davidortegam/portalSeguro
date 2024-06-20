@@ -1,0 +1,367 @@
+<div class="contenedor">
+    <div class="marco">
+        <form [formGroup]="excepcionFormGroup">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12 mt-3  ms-auto">
+                    <mat-form-field class="w-100" appearance="fill" color="warn">
+                        <mat-label>Ramo</mat-label>
+                        <input type="text" matInput formControlName="ramo">
+                    </mat-form-field>
+                </div>
+                <!--<div class="col-sm">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Subcentral</mat-label>
+                        <input type="text" matInput formControlName="subcentral">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Estructural</mat-label>
+                        <input type="text" matInput formControlName="estructural">
+                    </mat-form-field>
+                </div>!-->
+                <div class="col-md-3 col-sm-4 col-xs-12 mt-3  ms-auto">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Comercial</mat-label>
+                        <input type="text" matInput formControlName="comercial">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 mt-3  ms-auto">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Agente</mat-label>
+                        <input type="text" matInput formControlName="agente">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 mt-3  ms-auto">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Póliza</mat-label>
+                        <input type="text" matInput formControlName="poliza">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 mt-3  ms-auto">
+                    <mat-form-field class="w-100" appearance="fill" color="warn">
+                        <mat-label>Cobertura</mat-label>
+                        <input type="text" matInput formControlName="cobertura">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 mt-3  ms-auto">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Fecha Validez</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="fechaValidez">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>            
+                    <div class="col-md-2 col-sm-4 col-xs-12 mt-3  ms-auto">                 
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 mt-3  ms-auto">
+                        <p-button (onClick)="clearScreen()" class="w-100" label="Limpiar" icon="pi pi-eraser"></p-button>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 mt-3  ms-auto">
+                    
+                        <p-button (onClick)="consultar()" class="w-100" label="Buscar" icon="pi pi-search"></p-button>
+                    </div>
+                
+                
+            </div>
+        </form>
+        <div class="row mt-2">
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState" (closed)="panelOpenState" [expanded]="true">
+                    <mat-expansion-panel-header style="background-color: #da2d25;" [collapsedHeight]="'40px'"
+                        [expandedHeight]="'48px'">
+                        <mat-panel-title style="color: white;">
+                            Resultado
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="m-2">
+                        <div class="table-container">
+                            <table mat-table [dataSource]="data" #table>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                <ng-container matColumnDef="ACCIONES">
+                                    <th class="acciones-cell" mat-header-cell *matHeaderCellDef>Acciones</th>
+                                    <td class="acciones-cell w-200" mat-cell *matCellDef="let element">
+                                        <div class="button-container">
+                                            <p-button (onClick)="goToAdd()" icon="pi pi-plus" [text]="true"></p-button>
+                                            <p-button (onClick)="goToEdit(element.RAMO,element.NOMBRE_DOCUMENTO)" icon="pi pi-pen-to-square" [text]="true"></p-button>
+                                            <p-button (onClick)="eliminarFila(element.CODIGO)" icon="pi pi-trash" [text]="true"></p-button>
+                                        </div>
+                                        
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="RAMO">
+                                    <th class="proceso-cell" mat-header-cell *matHeaderCellDef>Ramo</th>
+                                    <td class="proceso-cell" mat-cell *matCellDef="let element">
+                                        {{element.RAMO}}</td>
+                                </ng-container>
+                                <!--<ng-container matColumnDef="SUBCENTRAL">
+                                    <th class="area-cell" mat-header-cell *matHeaderCellDef>Sub-Central</th>
+                                    <td class="area-cell" mat-cell *matCellDef="let element">{{element.SUBCENTRAL}}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="ESTRUCTURAL">
+                                    <th class="departamento-cell" mat-header-cell *matHeaderCellDef>Estructural
+                                    </th>
+                                    <td class="departamento-cell" mat-cell *matCellDef="let element">
+                                        {{element.ESTRUCTURAL}}</td>
+                                </ng-container>!-->
+                                <ng-container matColumnDef="COMERCIAL">
+                                    <th class="codigo-cell" mat-header-cell *matHeaderCellDef>Comercial</th>
+                                    <td class="codigo-cell" mat-cell *matCellDef="let element">{{element.COMERCIAL}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="AGENTE">
+                                    <th class="macroproceso-cell" mat-header-cell *matHeaderCellDef>Agente
+                                    </th>
+                                    <td class="macroproceso-cell" mat-cell *matCellDef="let element">
+                                        {{element.AGENTE}}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="POLIZA">
+                                    <th class="documento-cell" mat-header-cell *matHeaderCellDef>Poliza</th>
+                                    <td class="documento-cell" mat-cell *matCellDef="let element">
+                                        {{element.POLIZA}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="COBERTURA">
+                                    <th class="version-cell" mat-header-cell *matHeaderCellDef>Cobertura</th>
+                                    <td class="version-cell" mat-cell *matCellDef="let element">
+                                        {{element.COBERTURA}}</td>
+                                </ng-container>
+                                <!--<ng-container matColumnDef="MONEDA">
+                                    <th mat-header-cell *matHeaderCellDef class="fecha-creacion-cell">Moneda
+                                    </th>
+                                    <td mat-cell *matCellDef="let element" class="fecha-creacion-cell">
+                                        {{element.MONEDA}}</td>
+                                </ng-container>!-->
+                                <ng-container matColumnDef="FECHA_VALIDEZ">
+                                    <th class="solicitanteact-cell" mat-header-cell *matHeaderCellDef>
+                                        Fecha Validez
+                                    </th>
+                                    <td class="solicitanteact-cell" mat-cell *matCellDef="let element">
+                                        {{element.FECHA_VALIDEZ}}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="AGENTEDOS">
+                                    <th mat-header-cell *matHeaderCellDef class="fecha-actualizacion-cell">% AGENTE</th>
+                                    <td mat-cell *matCellDef="let element" class="fecha-actualizacion-cell">
+                                        {{element.AGENTEDOS}}
+                                    </td>
+                                </ng-container>
+                                <!--<ng-container matColumnDef="AGENTETRES">
+                                    <th mat-header-cell *matHeaderCellDef class="fecha-actualizacion-cell">% AGENTE</th>
+                                    <td mat-cell *matCellDef="let element" class="fecha-actualizacion-cell">
+                                        {{element.AGENTETRES}}
+                                    </td>
+                                </ng-container>!-->
+                                <ng-container matColumnDef="RAPPEL_UNO">
+                                    <th mat-header-cell *matHeaderCellDef class="fecha-actualizacion-cell">% RAPPEL</th>
+                                    <td mat-cell *matCellDef="let element" class="fecha-actualizacion-cell">
+                                        {{element.RAPPEL_UNO}}
+                                    </td>
+                                </ng-container>
+                                <!--<ng-container matColumnDef="RAPPELDOS">
+                                    <th mat-header-cell *matHeaderCellDef class="fecha-actualizacion-cell">% RAPPEL</th>
+                                    <td mat-cell *matCellDef="let element" class="fecha-actualizacion-cell">
+                                        {{element.RAPPELDOS}}
+                                    </td>
+                                </ng-container>!-->
+                                <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="2" rowspan="2">
+                                        <div >
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px"
+                                                y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100"
+                                                xml:space="preserve" style="fill: #918e8e;">
+                                                <path
+                                                    d="M74.815,41.455V29.33c0-4.136-3.364-7.5-7.5-7.5H52.255l-8.001-7H13.149c-4.136,0-7.5,3.364-7.5,7.5v38.168  c0,4.136,3.364,7.5,7.5,7.5h37.878C53.205,77.809,61.97,85.17,72.427,85.17c12.089,0,21.924-9.835,21.924-21.924  C94.351,51.965,85.784,42.649,74.815,41.455z M50.51,62.998h-37.36c-1.379,0-2.5-1.121-2.5-2.5V22.33c0-1.379,1.121-2.5,2.5-2.5  h29.226l8.001,7h16.939c1.379,0,2.5,1.121,2.5,2.5v12.153C59.034,42.77,50.634,51.905,50.51,62.998z M72.427,80.17  c-9.332,0-16.924-7.592-16.924-16.924s7.592-16.924,16.924-16.924s16.924,7.592,16.924,16.924S81.759,80.17,72.427,80.17z   M72.315,51.111c-1.381,0-2.5,1.119-2.5,2.5v10.333c0,1.381,1.119,2.5,2.5,2.5s2.5-1.119,2.5-2.5V53.611  C74.815,52.23,73.696,51.111,72.315,51.111z M72.315,68.944c-1.381,0-2.5,1.119-2.5,2.5v0.167c0,1.381,1.119,2.5,2.5,2.5  s2.5-1.119,2.5-2.5v-0.167C74.815,70.063,73.696,68.944,72.315,68.944z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            No hay información
+                                        </div>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <mat-paginator [pageSizeOptions]="[10, 30, 50]" color="warn" showFirstLastButtons
+                            aria-label="Select page of periodic elements">
+                        </mat-paginator>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+
+<p-dialog header={{nombreDocumentoVersion}} [(visible)]="visible" [modal]="true" [style]="{ width: '60rem' }">
+        <div class="contenedor">
+            <div class="marco">
+                <form [formGroup]="excepcionNuevoFormGroup">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" color="warn">
+                            <mat-label>Ramo</mat-label>
+                                <input type="text" matInput formControlName="ramo">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" color="warn">
+                            <mat-label>Subcentral</mat-label>
+                                <input type="text" matInput formControlName="subcentral">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" color="warn">
+                            <mat-label>Estructural</mat-label>
+                                <input type="text" matInput formControlName="estructural">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" color="warn">
+                            <mat-label>Comecial</mat-label>
+                                <input type="text" matInput formControlName="comercial">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" color="warn">
+                            <mat-label>Agente</mat-label>
+                                <input type="text" matInput formControlName="agente">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" color="warn">
+                            <mat-label>Poliza</mat-label>
+                                <input type="text" matInput formControlName="poliza">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" color="warn">
+                            <mat-label>Cobertura</mat-label>
+                                <input type="text" matInput formControlName="cobertura">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" color="warn">
+                            <mat-label>Moneda</mat-label>
+                                <input type="text" matInput formControlName="moneda">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" color="warn">
+                                <mat-label>Fecha</mat-label>
+                                <input matInput [matDatepicker]="picker2" formControlName="ingresoFechaVal">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-8">
+
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-align-center"> Nueva Prod...</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-align-center"> Carter...</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-align-center mt-2"> % Agent...</p>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" color="warn">
+                                <mat-label>%</mat-label>
+                                    <input type="text" matInput formControlName="Agentenp">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" color="warn">
+                                <mat-label>%</mat-label>
+                                    <input type="text" matInput formControlName="Agentecartera">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-align-center mt-2"> % Rapp...</p>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" color="warn">
+                                <mat-label>%</mat-label>
+                                    <input type="text" matInput formControlName="Rapper">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" color="warn">
+                                <mat-label>%</mat-label>
+                                    <input type="text" matInput formControlName="RapperCartera">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-align-center mt-2"> % Aseso...</p>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" color="warn">
+                                <mat-label>%</mat-label>
+                                    <input type="text" matInput formControlName="Asesor">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" color="warn">
+                                <mat-label>%</mat-label>
+                                    <input type="text" matInput formControlName="AsesorCartera">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field style="width: 100%;" appearance="fill" color="warn">
+                                <mat-label>Objeto</mat-label>
+                                    <input type="text" matInput formControlName="Objeto">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field style="width: 100%;" appearance="fill" color="warn">
+                                <mat-label>Objeto Anul</mat-label>
+                                    <input type="text" class="mat-form-field-infix" matInput formControlName="ObjetoAnulacion">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field style="width: 100%;" appearance="fill" color="warn">
+                                <mat-label>Observaciones</mat-label>
+                                    <input type="text" matInput formControlName="Observaciones">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field style="width: 100%;" appearance="fill" color="warn">
+                                <mat-label>Póliza Grupo</mat-label>
+                                    <input type="text" matInput formControlName="PolizaGrupo">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field style="width: 100%;" appearance="fill" color="warn">
+                                <mat-label>Contrato Pól</mat-label>
+                                    <input type="text" matInput formControlName="ContratoPoliza">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            
+                        </div>
+                        <div class="col-md-4">
+                            
+                        </div>
+                        <div class="col-md-2">
+                            <p-button (onClick)="grabar()" class="w-100" label="Grabar" icon="pi pi-save"></p-button>
+                        </div>
+                        <div class="col-md-2">
+                            <p-button (onClick)="clearScreen()" class="w-100" label="Limpiar" icon="pi pi-eraser"></p-button>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+</p-dialog>
+
+
+<p-confirmDialog></p-confirmDialog>

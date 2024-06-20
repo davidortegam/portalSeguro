@@ -1,0 +1,49 @@
+<div class="grid">
+  <div class="order__left centered">
+    <div class="card p-5">
+      <div class="form">
+        <div class="logo">
+          <img class="img w-100 mb-3" src="../../assets/logo-mapfre.png">
+        </div>
+        <h4>
+          Para acceder a la gestión de tu cuenta, ingresa los siguientes datos:
+        </h4>
+
+        <input type="text" id="username" name="username" placeholder="USUARIO" autocomplete="off"
+          [formControl]="usuario" style="text-transform: uppercase;">
+        <div class="row">
+          <input [type]="show ? 'text' : 'password'" id="password" name="password" placeholder="CONTRASEÑA" autocomplete="off" class="password"
+        [formControl]="password" (keyup.enter)="login()">
+        <button class="verpsw col-sm" (click)="passwordf()"><mat-icon matListItemIcon>{{icono}}</mat-icon></button>
+        </div>
+        <div class="button">
+          <a (click)="login()">Ingresar</a>
+        </div>
+        <h5 class="pt-4 text-center m-0">Versión {{version}}</h5>
+        <!-- <button  mat-raised-button color="warn" class="login__button" (click)="login()">Ingresar</button> -->
+
+
+        <!-- <div class="signup">
+          <label class="remember_me">
+          Don't have an account?</label><a href="#" class="forgot__password" style="text-decoration: none;"><strong>Sign up for free.</strong></a>
+        </div> -->
+
+      </div>
+    </div>
+  </div>
+
+  <div class="order__right centered no__overflow">
+    <!-- <img class="w-100 h-100" src="https://americaeconomica.com/wp-content/uploads/2023/01/6033036563_64750068b8_b.jpg" alt="picture"> -->
+    <div id="wrapper">
+
+      <div class="dust"><img class="h-100 w-100"
+          src="https://americaeconomica.com/wp-content/uploads/2023/01/6033036563_64750068b8_b.jpg" /></div>
+
+      <!-- <div class="foreground"><img src="http://www.mattdrew.co.uk/experiments/images/ex-2point5d/foreground.png" /></div>
+    
+    <div class="midground"><img src="http://www.mattdrew.co.uk/experiments/images/ex-2point5d/midground.png" /></div>
+    
+    <div class="background"><img src="http://www.mattdrew.co.uk/experiments/images/ex-2point5d/background.jpg" /></div> -->
+    </div><!--wrapper-->
+  </div>
+</div>

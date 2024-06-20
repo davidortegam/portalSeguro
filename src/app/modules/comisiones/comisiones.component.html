@@ -1,0 +1,49 @@
+<div class="contenedor">
+    <div class="marco">
+        <form [formGroup]="comisionFormGroup">
+            <div class="row">
+                <div class="col-sm">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Ramo</mat-label>
+                        <input type="text" matInput formControlName="ramo">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Agente</mat-label>
+                        <input type="text" matInput formControlName="ramo">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Póliza</mat-label>
+                        <input type="text" matInput formControlName="ramo">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Cobertura</mat-label>
+                        <input type="text" matInput formControlName="ramo">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field appearance="fill" color="warn">
+                        <mat-label>Fecha Validez</mat-label>
+                        <input type="text" matInput formControlName="ramo">
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-sm form-group">
+                <div class="row">
+                    <mat-form-field color="warn" appearance="fill">
+                        <mat-label>Búsqueda filtrada</mat-label>
+                        <input matInput placeholder="Ingresa el texto a buscar" #input>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

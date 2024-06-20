@@ -1,0 +1,27 @@
+<div class="contenedor">
+  <div class="marco">
+    <div *ngIf="dataCargada" class="row align-items-center justify-content-center">
+      <div *ngIf="combo.length === 0" class="col-md-12">
+        <div class="custom-card no-items-card" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)"
+          (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)">
+          <p-card [header]="'No hay elementos para mostrar'"
+            [style]="{ width: '100%', backgroundColor: 'white', color: '#DA2D25' }">
+            <div class="icon-container">
+              <i class="pi pi-exclamation-triangle" [style]="{ fontSize: '5rem', color: '#DA2D25' }"></i>
+            </div>
+          </p-card>
+        </div>
+      </div>
+      <div *ngFor="let item of combo" class="col-md-4 col-sm-6 col-xs-12">
+        <div class="custom-card" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)"
+          (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (click)="onSelected(item)">
+          <p-card [header]="item" [style]="{ width: '100%', backgroundColor: '#DA2D25', color: 'white' }">
+            <div class="icon-container">
+              <i class="pi" [ngClass]="getIconClass(item)" [style]="{ fontSize: '5rem', color: 'white' }"></i>
+            </div>
+          </p-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,118 @@
+:host {
+  display: block;
+}
+.modal {
+  padding: 10px;
+  width: 90vh;
+  height: 70vh;
+  display: block;
+  position: relative;
+}
+
+.modal2 {
+  padding: 10px;
+  margin:10px;
+  width: 32vh;
+  height: 24vh;
+  display: block;
+  position: relative;
+}
+
+h3 {
+  margin: 0px;
+  font-weight: bold;
+}
+.drop-box {
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 300px;
+  min-width: 500px;
+  width:500px;
+  display: table;
+  background-color: #dddddd;
+  border: solid 1px #dddddd;
+  background: url('box.svg') center no-repeat;
+
+}
+.drop-box::before {
+    content: ' Arraste un archivo ó ';
+    font-size:14px;
+ 
+}
+.centro{
+    text-align: center
+}
+
+h1 {
+  color: #da2d25;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+
+.custom-card {
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.custom-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.custom-card:active {
+  transform: translateY(10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilos para las tarjetas normales con datos */
+/* .custom-card {
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.custom-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.custom-card:active {
+  transform: translateY(10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.custom-card:hover p-card {
+  background-color: white !important;
+  color: #DA2D25 !important;
+}
+
+.custom-card:hover .icon-container i {
+  color: #DA2D25 !important;
+} 
+
+*/
+
+.custom-card:hover .icon-container i {
+  /* color: #DA2D25 !important; */
+} 
+
+/* Estilos para la tarjeta de "No hay elementos para mostrar" */
+/* .no-items-card {
+  background-color: white;
+  color: #DA2D25;
+}
+
+.no-items-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.no-items-card:active {
+  transform: translateY(10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+} */

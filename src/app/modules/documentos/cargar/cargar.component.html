@@ -1,0 +1,162 @@
+<div class="contenedor">
+    <div class="row btn-create" *ngIf="codigo > 0">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <p-button [disabled]="disableButton" label="Nuevo" icon="pi pi-file-plus" (onClick)="goToNew()" />
+        </div>
+    </div>
+    <div class="row align-items-start">
+        <div class="col-md-6 mb-2">
+            <div class="marco">
+                <form [formGroup]="saveFormGroup">
+                    <div class="row align-items-center">
+                        <div class="col-md-12 col-sm-12 col-xs-12 pt-3">
+                            <mat-form-field class="w-100" appearance="fill" color="warn">
+                                <mat-label>Código</mat-label>
+                                <input type="text" matInput formControlName="codigoRef">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-sm-6 pt-3">
+                            <mat-form-field class="w-100" color="warn" appearance="fill">
+                                <mat-label>Proceso</mat-label>
+                                <mat-select formControlName="proceso" required
+                                    (valueChange)="handleChangeProceso($event, true)">
+                                    <mat-option *ngFor="let proceso of listaProcesos" [value]="proceso.COD_PROCESO">
+                                        {{proceso.NOM_PROCESO}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6 col-sm-6 pt-3">
+                            <mat-form-field class="w-100" color="warn" appearance="fill">
+                                <mat-label>Macroproceso</mat-label>
+                                <mat-select formControlName="macroProceso" required>
+                                    <mat-option *ngFor="let macroProceso of listaMacroprocesosFiltrada"
+                                        [value]="macroProceso.COD_MACROPROCESO">
+                                        {{macroProceso.NOM_MACROPROCESO}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-sm-6 pt-3">
+                            <mat-form-field class="w-100" color="warn" appearance="fill">
+                                <mat-label>Tipo de Documento</mat-label>
+                                <mat-select formControlName="tipoDocumentos" required>
+                                    <mat-option *ngFor="let opcion of listaTipoDocumentoFiltrada"
+                                        [value]="opcion.COD_TIPO_DOCUMENTO">
+                                        {{opcion.NOM_TIPO_DOCUMENTO}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 pt-3">
+                            <mat-form-field class="w-100" appearance="fill" color="warn">
+                                <mat-label>Versión Documento</mat-label>
+                                <input type="text" matInput formControlName="versionDocumento" (blur)="verifyVersion()">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-12 col-sm-12 col-xs-12 pt-3">
+                            <mat-form-field class="w-100" appearance="fill" color="warn">
+                                <mat-label>Nombre Documento</mat-label>
+                                <input type="text" matInput formControlName="nombreDocumento">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-sm-6 col-xs-12 pt-3">
+                            <mat-form-field class="w-100" appearance="fill" color="warn">
+                                <mat-label>Area</mat-label>
+                                <mat-select formControlName="area"
+                                    (valueChange)="handleChangeArea($event)">
+                                    <mat-option *ngFor="let area of listaAreas" [value]="area.COD_AREA">
+                                        {{area.NOM_AREA}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 pt-3">
+                            <mat-form-field class="w-100" appearance="fill" color="warn">
+                                <mat-label>Departamento</mat-label>
+                                <mat-select formControlName="departamento">
+                                    <mat-option *ngFor="let dep of listaDepartamentosFiltrada" [value]="dep.COD_DEPARTAMENTO">
+                                        {{dep.NOM_DEPARTAMENTO}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-sm-6 col-xs-12 pt-3">
+                            <mat-form-field class="w-100" appearance="fill" color="warn">
+                                <mat-label>Solicitante de actualización</mat-label>
+                                <input type="text" matInput formControlName="solicitanteActualizacion">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 pt-3">
+                            <mat-form-field class="w-100" appearance="fill" color="warn">
+                                <mat-label>Responsable de autorización</mat-label>
+                                <input type="text" matInput formControlName="responsableAutorizacion">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-12 col-sm-12 col-xs-12 pt-3">
+                            <mat-form-field class="w-100" appearance="fill" color="warn">
+                                <mat-label>Palabras claves</mat-label>
+                                <input type="text" matInput formControlName="palabrasClaves">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="card flex justify-content-center mb-2" *ngIf="codigo > 0">
+                <p-panel header="Archivo actual">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 col-sm-3">
+                            <i class={{iconFile}} [style]="iconStyle"></i>
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <p (click)="downloadFile(codigo, nombreArchivoAnterior)"
+                                style="color: blue; text-decoration: underline; cursor: pointer;"
+                            >
+                                {{nombreArchivoAnterior}}.{{tipoArchivoAnterior}}
+                            </p>
+                        </div>
+                    </div>
+                </p-panel>
+            </div>
+            <div class="card flex justify-content-center">
+                <p-toast />
+                <p-fileUpload chooseLabel=" Elegir Archivo" name="demo[]" [showCancelButton]="showButton"
+                    [showUploadButton]="showButton" (onSelect)="onFileChange($event)" (onRemove)="onRemove($event)"
+                    #fileUpload [multiple]="false">
+                    <ng-template pTemplate="content">
+                        <div *ngIf="selectedFile === null"
+                            style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <i class="pi pi-cloud-upload border-2 border-circle p-3 text-8xl text-400 border-400"
+                                style="font-size: 10rem"></i>
+                            <p class="mb-0">Arrastre y suelte el archivo aquí para {{textoAccionArchivo}}.</p>
+                        </div>
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+
+            <div>
+                <div class="d-flex flex-row-reverse">
+                    <div class="col-md-14 col-sm-10 col-xs-12">
+                        <div class="custom-container">
+                            <p-button [disabled]="disableButton" label={{textBtn}} icon="pi pi-save" (onClick)="saveOrEdit()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

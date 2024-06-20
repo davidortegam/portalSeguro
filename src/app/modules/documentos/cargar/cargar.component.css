@@ -1,0 +1,24 @@
+.marco{
+  border: #da2d25 2px solid;
+  padding: 20px;
+  border-radius: 5px; 
+}
+
+.custom-container {
+  position: relative;
+  /* border: 1px solid #000; */
+  border-radius: 10px;
+  /* padding: 20px; */
+  height: 150px; /* Adjust height as needed */
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: -20px;
+}
+.bottom-right {
+  margin: 0;
+}
+.btn-create {
+  margin-top: -10px;
+  margin-bottom: 5px;
+}

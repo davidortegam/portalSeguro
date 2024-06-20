@@ -1,0 +1,36 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === true">
+    <mat-toolbar><img class="w-100 filter" src="../../assets/logo-mapfre.png"
+        alt=""></mat-toolbar>
+    <mat-nav-list>
+      <a class="menu" mat-list-item [routerLink]="['home']"><mat-icon matListItemIcon>home</mat-icon>
+        <div matListItemTitle>Inicio</div>
+      </a>
+  <mat-expansion-panel class="remove-mat-expansion-panel-padding" *ngFor="let sector of sector" [class.mat-elevation-z0]="true">
+    <mat-expansion-panel-header class="menu">
+      <div matListItemTitle>{{sector.opc_descripcion}}</div>
+    </mat-expansion-panel-header>
+    <mat-nav-list class=>
+      <a class="menu-sector"  *ngFor="let opciones of sector.opciones" mat-list-item (click)="redirigir(opciones)">
+        <div matListItemTitle>{{opciones.opc_nombre}}</div>
+      </a>
+    </mat-nav-list>
+  </mat-expansion-panel>
+      <a class="menu" mat-list-item (click)="cerrarSesion()"><mat-icon matListItemIcon>logout</mat-icon>
+        <div matListItemTitle>Salir</div>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="mapfre position-fixed">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <app-breadcrumb></app-breadcrumb>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

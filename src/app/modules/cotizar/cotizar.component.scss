@@ -1,0 +1,21 @@
+.imagen-inicio{
+  background: inherit;
+  /* background-color: #da2d25; */
+  color: white;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: min(max(16px, 4vw), 30px);
+  background-image: url('../../../assets/logo-mapfre.png');
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+  border-bottom: solid 1px white;
+}
+
+.botonCo{
+  // font-weight: bold;
+  font-size: 20px;
+}

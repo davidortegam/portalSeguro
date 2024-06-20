@@ -1,0 +1,46 @@
+@import "theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+html, body { height: 100%;
+              background-image: url('assets/fondo-abstracto-poligono-gris-blanco_78474-414.jpg'); }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mapfre{
+  background-color: #da2d25;
+  color: white;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.contenedor{
+  height: 90vh;
+  width: 100%;
+  display: block;
+  padding: 3%;
+}
+
+.remove-mat-expansion-panel-padding .mat-expansion-panel-content .mat-expansion-panel-body{
+  padding: 0 !important;
+}
+
+.mat-mdc-option-text:hover:not(.mat-option-disabled) {
+  color: white !important;
+}
+
+.mat-mdc-option:hover {
+  background: #da2e253f !important;
+  color: black !important;
+}
+
+.material-icons{
+  font-family: 'Material Icons' !important;
+}

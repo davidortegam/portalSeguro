@@ -1,0 +1,30 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" *ngIf='breadcrumbs.length; else dashboard'>
+    <li class="breadcrumb-item">
+      <a aria-label='Home' routerLinkActive='active' [routerLink]='["/home"]'><span class='icon-home'>Inicio</span></a>
+    </li>
+    <ng-template #breadcrumbLi>
+      <li *ngFor="let breadcrumb of breadcrumbs.slice(0,breadcrumbs.length-1); let i = index" class="breadcrumb-item">
+        <a routerLinkActive='active' [routerLink]='["/home"]'
+          *ngIf='breadcrumb.label === "Home"; else nonHomeLink'><span class='icon-home'></span></a>
+        <ng-template #nonHomeLink>
+          <a [routerLink]="[breadcrumb.url]" > {{ breadcrumb.label }} </a>
+        </ng-template>
+
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">{{ breadcrumbs[breadcrumbs.length-1].label }}</li>
+    </ng-template>
+
+    <li *ngIf='(showSpinnerAction$ | async); else breadcrumbLi'>
+      <span class="breadcrumb-item icon-spin3 animate-spin">Cargando...</span></li>
+    <li class="breadcrumb-controls"><span class="icon-resize-full" (click)='goFullScreen()'></span></li>
+  </ol>
+  <ng-template #dashboard>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">
+        <span class='icon-home'></span>
+      </li>
+      <li *ngIf='(showSpinnerAction$ | async)'><span class="breadcrumb-item icon-spin3 animate-spin"></span></li>
+    </ol>
+  </ng-template>
+</nav>

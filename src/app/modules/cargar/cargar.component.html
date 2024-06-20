@@ -1,0 +1,115 @@
+<div class="contenedor">
+    <div class="marco">
+        <div class="row">
+            <div class="col-5 form-group">
+                <input type="file" class="form-control" (change)="onFileChange($event)" placeholder="Subir archivo"
+                    accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    multiple="false">
+            </div>
+            <div class="col-2 form-group">
+                <button mat-raised-button color="warn" [disabled]="data.length==0" (click)="cargar()">
+                    <mat-icon>settings</mat-icon>
+                    Procesar
+                </button>
+            </div>
+            <div class="col-5 form-group p-2">
+                <mat-card>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm form-group">
+                                <h3>Total: {{data.length}}</h3>
+                            </div>
+                            <div class="col-sm form-group">
+                                <h3 class="text-success">Correctas: {{correctas}}</h3>
+                            </div>
+                            <div class="col-sm form-group">
+                                <h3 class="text-danger" style="cursor: pointer;" (click)="verIncorrectas()">Incorrectas: {{incorrectas}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="example-container">
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="ID">
+                <th mat-header-cell *matHeaderCellDef>N°</th>
+                <td mat-cell *matCellDef="let element"><strong class="text-danger">{{element.N}}</strong></td>
+            </ng-container>
+            <ng-container matColumnDef="COD_CIA">
+                <th mat-header-cell *matHeaderCellDef>CIA</th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color':element.COD_CIA ? '':'#ffbfaf'}">{{element.COD_CIA}}</td>
+            </ng-container>
+            <ng-container matColumnDef="TIP_DOCUM">
+                <th mat-header-cell *matHeaderCellDef>TIPO</th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color':element.TIP_DOCUM ? '':'#ffbfaf'}">{{element.TIP_DOCUM}}</td>
+            </ng-container>
+            <ng-container matColumnDef="COD_DOCUM">
+                <th mat-header-cell *matHeaderCellDef>DOCUMENTO</th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color':element.COD_DOCUM ? '':'#ffbfaf'}">{{element.COD_DOCUM}}</td>
+            </ng-container>
+            <ng-container matColumnDef="APE1_TERCERO">
+                <th mat-header-cell *matHeaderCellDef>APELLIDO_1</th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color':element.APE1_TERCERO ? '':'#ffbfaf'}">{{element.APE1_TERCERO}}</td>
+            </ng-container>
+            <ng-container matColumnDef="APE2_TERCERO">
+                <th mat-header-cell *matHeaderCellDef>APELLIDO_2</th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color':element.APE2_TERCERO ? '':'#ffbfaf'}">{{element.APE2_TERCERO}}</td>
+            </ng-container>
+            <ng-container matColumnDef="NOM_TERCERO">
+                <th mat-header-cell *matHeaderCellDef>NOMBRES</th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color':element.NOM_TERCERO ? '':'#ffbfaf'}">{{element.NOM_TERCERO}}</td>
+            </ng-container>
+            <ng-container matColumnDef="EMAIL">
+                <th mat-header-cell *matHeaderCellDef>EMAIL</th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color':element.EMAIL ? '':'#ffbfaf'}">{{element.EMAIL}}</td>
+            </ng-container>
+            <ng-container matColumnDef="TLF_MOVIL">
+                <th mat-header-cell *matHeaderCellDef>TELÉFONO</th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color':element.TLF_MOVIL ? '':'#ffbfaf'}">{{element.TLF_MOVIL}}</td>
+            </ng-container>
+            <ng-container matColumnDef="NOM_DOMICILIO">
+                <th mat-header-cell *matHeaderCellDef>DOMICILIO</th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color':element.NOM_DOMICILIO ? '':'#ffbfaf'}">{{element.NOM_DOMICILIO}}</td>
+            </ng-container>
+            <ng-container matColumnDef="TIP_DOCUM_RP">
+                <th mat-header-cell *matHeaderCellDef>TIPO_RP</th>
+                <td mat-cell *matCellDef="let element">{{element.TIP_DOCUM_RP}}</td>
+            </ng-container>
+            <ng-container matColumnDef="COD_DOCUM_RP">
+                <th mat-header-cell *matHeaderCellDef>DOCUMENTO_RP</th>
+                <td mat-cell *matCellDef="let element">{{element.COD_DOCUM_RP}}</td>
+            </ng-container>
+            <ng-container matColumnDef="APE1_TERCERO_RP">
+                <th mat-header-cell *matHeaderCellDef>APELLIDO_1_RP</th>
+                <td mat-cell *matCellDef="let element">{{element.APE1_TERCERO_RP}}</td>
+            </ng-container>
+            <ng-container matColumnDef="APE2_TERCERO_RP">
+                <th mat-header-cell *matHeaderCellDef>APELLIDO_2_RP</th>
+                <td mat-cell *matCellDef="let element">{{element.APE2_TERCERO_RP}}</td>
+            </ng-container>
+            <ng-container matColumnDef="NOM_TERCERO_RP">
+                <th mat-header-cell *matHeaderCellDef>NOMBRES_RP</th>
+                <td mat-cell *matCellDef="let element">{{element.NOM_TERCERO_RP}}</td>
+            </ng-container>
+            <ng-container matColumnDef="EMAIL_RP">
+                <th mat-header-cell *matHeaderCellDef>EMAIL_RP</th>
+                <td mat-cell *matCellDef="let element">{{element.EMAIL_RP}}</td>
+            </ng-container>
+            <ng-container matColumnDef="FECHA_ACEPTACION">
+                <th mat-header-cell *matHeaderCellDef>FECHA_ACEPTACION</th>
+                <td mat-cell *matCellDef="let element">{{element.FECHA_ACEPTACION}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="10">No se encontró información</td>
+            </tr>
+        </table>
+        
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 30, 50]" color="warn" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+</div>

@@ -1,0 +1,75 @@
+:host {
+  display: block;
+}
+.example-container{
+  margin-top: 1%;
+  overflow-x: scroll;
+  width: 100%;
+  max-height: 100%;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+}
+
+th, td {
+  overflow-wrap: break-word;
+  width: 150px;
+}
+.mat-column-PERSONA {
+  flex: none;
+  width: 250px !important;
+}
+.mat-column-EMAIL {
+  flex: none;
+  width: 250px !important;
+}
+.mat-column-TIP_DOCUM {
+  flex: none;
+  width: 90px !important;
+}
+.mat-column-MCA_ACEPTACION {
+  flex: none;
+  width: 90px !important;
+}
+.mat-column-NOM_DOMICILIO {
+  flex: none;
+  width: 300px;
+}
+.mdc-data-table__header-cell{
+  color: #da2d25;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: rgb(230, 230, 230) !important;
+}
+.mdc-data-table__row:hover{
+  background-color: #dddddd !important;
+}
+.mdc-data-table__cell{
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.boton-tabla{
+  margin: 0px !important;
+  padding: 0px !important;
+  border: #da2d25 0px solid;
+  background-color: transparent;
+  color:#da2d25;
+  border-radius: 5px;
+}
+.marco{
+  border: #da2d25 2px solid;
+  padding: 20px;
+  border-radius: 5px; 
+}
+.modal{
+  padding: 10px;
+  width: 90vh;
+  height: 50vh;
+  display: block;
+  position: relative;
+}

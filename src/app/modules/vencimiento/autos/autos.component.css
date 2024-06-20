@@ -1,0 +1,182 @@
+:host {
+  display: block;
+}
+
+/* .marco {
+  border: #da2d25 2px solid;
+  min-height: 160px;
+  min-width:100%;
+  padding: 20px;
+  border-radius: 5px;
+  display:table;
+} */
+
+::ng-deep .mat-expansion-indicator:after {
+  color: white;
+}
+
+.mt-n1 {
+  margin-top: -0.80rem !important;
+}
+
+.espacio {
+  padding: 5px;
+}
+/* .columna {
+    width:80%;
+    float:left;
+    display:block;
+} */
+.columnader {
+  width: 8%;
+  float: inline-start;
+  display: block;
+  padding-top: 4px;
+  padding-left: 20px;
+  padding-right: 1px;
+ 
+}
+
+.example-container {
+  margin-top: 1%;
+  overflow-x: scroll;
+  width: 100%;
+  height: 400px;
+  max-height: 100%;
+}
+
+.mdc-data-table__header-cell {
+  color: #da2d25;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: rgb(230, 230, 230) !important;
+}
+
+td {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  padding: 10px;
+  width: 90vh;
+  height: 70vh;
+  display: block;
+  position: relative;
+}
+h3 {
+  margin: 0px;
+  font-weight: bold;
+}
+
+.mdc-data-table__header-cell {
+  color: #da2d25;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: rgb(230, 230, 230) !important;
+}
+
+.mdc-data-table__row:hover {
+  background-color: #dddddd !important;
+}
+
+.mdc-data-table__cell {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.ramo-cell {
+  min-width: 70px;
+}
+
+.producto-cell {
+  min-width: 150px;
+}
+
+.poliza-cell {
+  min-width: 180px;
+}
+
+.tomador-cell {
+  min-width: 150px;
+}
+
+.agente-cell {
+  min-width: 150px;
+}
+
+.marca-cell {
+  min-width: 80px;
+}
+
+.modelo-cell {
+  min-width: 200px;
+}
+
+.afabri-cell {
+  min-width: 150px;
+}
+
+.primanta-cell {
+  min-width: 150px;
+}
+
+.sinult-cell {
+  min-width: 150px;
+}
+
+.nommodal-cell {
+  min-width: 180px;
+}
+
+.numpoliza-cell {
+  min-width: 120px;
+}
+
+.nompoliza-cell {
+  min-width: 150px;
+}
+
+.numcontra-cell {
+  min-width: 120px;
+}
+
+.nomcontra-cell {
+  min-width: 200px;
+}
+
+.calcprima-cell {
+  min-width: 200px;
+}
+
+.tasa-cell {
+  min-width: 70px;
+}
+
+.prop-cell {
+  min-width: 150px;
+}
+
+.accion-cell {
+  min-width: 70px;
+}
+
+.lleno {
+  flex:none;
+  width: 200px !important;
+}
+.lleno2 {
+  flex: none;
+  width: 210px !important;
+}
+.lleno4 {
+  flex: none;
+  width: 260px !important;
+}
+.padding{
+    padding:0;
+}
+

@@ -1,0 +1,59 @@
+<h1 mat-dialog-title class="centro m-3"><strong>Resolución de Póliza</strong></h1>
+<div mat-dialog-content class="modal ">
+  <div class="w-100 ">
+    <input type="hidden" #num_poliza />
+    <mat-form-field class="col-12" color="warn" appearance="fill">
+      <mat-label>Estado</mat-label>
+      <mat-select id="opciones" [(ngModel)]="opcionSeleccionada" (valueChange)="onChange($event)">
+        <mat-option *ngFor="let opcion of estados" [value]="opcion">
+          {{opcion}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <h3>Ingresa observación</h3>
+  <div class="w-100">
+    <mat-form-field appearance="outline" color="warn" class="w-100">
+      <mat-label>Observación</mat-label>
+      <textarea matInput type="text" maxlength="2000" rows="6" #observacion>{{this.observacion_}}</textarea>
+      <mat-hint align="end">{{observacion.value.length}} / 2000</mat-hint>
+    </mat-form-field>
+  </div>
+  <h3>Adjunta sustento</h3>
+
+  <!-- <div class="w-100 form-group">
+    <div>
+      <input type="file" (change)="subirArchivo($event)" class="drop-box" accept=".pdf">
+
+    </div>
+  </div> -->
+
+  <div class="card flex justify-content-center">
+    <p-toast />
+    <p-fileUpload chooseLabel=" Elegir Archivo" name="demo[]" [showCancelButton]="showButton"
+      [showUploadButton]="showButton" (onSelect)="onFileChange($event)" (onRemove)="onRemove($event)" #fileUpload
+      [multiple]="false"  accept=".pdf">
+      <ng-template pTemplate="content">
+        <div [hidden]="selectedFile !== null" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <i class="pi pi-cloud-upload border-2 border-circle p-3 text-8xl text-400 border-400" style="font-size: 10rem"></i>
+          <p class="mb-0">Arrastre y suelte el archivo aquí para subirlo.</p>
+        </div>
+      </ng-template>
+    </p-fileUpload>
+  </div>
+
+</div>
+<div mat-dialog-actions class="m-3">
+  <!-- <button class="btn btn-danger w-100" (click)="Guardar(observacion.value)">Guardar</button>
+  <button class="btn btn-secundary w-100" (click)="onNoClick()">Cerrar</button> -->
+  <div class="row align-items-center">
+    <div class="col-md-6 col-sm-4 col-xs-12 mt-3">
+        <p-button (onClick)="Guardar(observacion.value)" styleClass="w-100" label="Guardar"
+            icon="pi pi-save"></p-button>
+    </div>
+    <div class="col-md-6 col-sm-4 col-xs-12 mt-3">
+        <p-button (onClick)="onNoClick()" styleClass="w-100" label="Cerrar"
+            icon="pi pi-times"></p-button>
+    </div>
+  </div>
+</div>
