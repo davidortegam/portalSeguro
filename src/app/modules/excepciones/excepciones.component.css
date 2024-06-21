@@ -57,8 +57,8 @@ td {
     display: flex;
 }
 
-.proceso-cell {
-    min-width: 150px;
+.ramo-cell {
+    min-width: 100px;
 }
 
 .area-cell {
@@ -73,20 +73,22 @@ td {
     min-width: 100px;
 }
 
-.macroproceso-cell {
-    min-width: 180px;
-}
-
-.solicitanteact-cell {
-    min-width: 180px;
-}
-
-.documento-cell {
-    min-width: 300px;
-}
-
-.version-cell {
+.agente-cell {
     min-width: 100px;
+}
+
+.fechaValidez-cell {
+    min-width: 180px;
+}
+
+.poliza-cell {
+    min-width: 100px;
+    text-align: center;
+}
+
+.cobertura-cell {
+    min-width: 100px;
+    text-align: center;
 }
 
 .fecha-creacion-cell {
@@ -94,8 +96,8 @@ td {
     min-width: 150px;
 }
 
-.fecha-actualizacion-cell {
-    min-width: 190px;
+.rappel {
+    min-width: 100px;
 }
 
 .link-style {

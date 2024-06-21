@@ -1,6 +1,7 @@
-<div class="contenedor">
-    <div class="marco">
-        <form [formGroup]="excepcionFormGroup">
+
+<div class="contenedor">    
+    <div class="marco">       
+        <form [formGroup]="busquedaFormGroup">
             <div class="row">
                 <div class="col-md-3 col-sm-4 col-xs-12 mt-3  ms-auto">
                     <mat-form-field class="w-100" appearance="fill" color="warn">
@@ -51,18 +52,20 @@
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
-                </div>            
-                    <div class="col-md-2 col-sm-4 col-xs-12 mt-3  ms-auto">                 
-                    </div>
-                    <div class="col-md-2 col-sm-4 col-xs-12 mt-3  ms-auto">
-                        <p-button (onClick)="clearScreen()" class="w-100" label="Limpiar" icon="pi pi-eraser"></p-button>
-                    </div>
-                    <div class="col-md-2 col-sm-4 col-xs-12 mt-3  ms-auto">
-                    
-                        <p-button (onClick)="consultar()" class="w-100" label="Buscar" icon="pi pi-search"></p-button>
-                    </div>
-                
-                
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-12 mt-3  ms-auto">
+                    <p-button (onClick)="goToAdd()" styleClass="w-100" label="Nuevo"
+                            icon="pi pi-file"></p-button>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-12 mt-3  ms-auto">
+                    <p-button (onClick)="clearScreen()" styleClass="w-100" label="Limpiar"
+                            icon="pi pi-eraser"></p-button>
+                </div>  
+                <div class="col-md-2 col-sm-4 col-xs-12 mt-3  ms-auto">
+                    <p-button (onClick)="consultar()" styleClass="w-100" label="Buscar"
+                            icon="pi pi-search"></p-button>
+                </div>          
+
             </div>
         </form>
         <div class="row mt-2">
@@ -84,18 +87,16 @@
                                     <th class="acciones-cell" mat-header-cell *matHeaderCellDef>Acciones</th>
                                     <td class="acciones-cell w-200" mat-cell *matCellDef="let element">
                                         <div class="button-container">
-                                            <p-button (onClick)="goToAdd()" icon="pi pi-plus" [text]="true"></p-button>
-                                            <p-button (onClick)="goToEdit(element.RAMO,element.NOMBRE_DOCUMENTO)" icon="pi pi-pen-to-square" [text]="true"></p-button>
-                                            <p-button (onClick)="eliminarFila(element.CODIGO)" icon="pi pi-trash" [text]="true"></p-button>
+                                            <p-button (onClick)="goToEdit(element.RAMO,element.COMERCIAL)" icon="pi pi-pen-to-square" [text]="true"></p-button>
+                                            <p-button (onClick)="eliminarFila(element.RAMO)" icon="pi pi-trash" [text]="true"></p-button>
                                         </div>
-                                        
                                     </td>
                                 </ng-container>
 
-                                <ng-container matColumnDef="RAMO">
-                                    <th class="proceso-cell" mat-header-cell *matHeaderCellDef>Ramo</th>
-                                    <td class="proceso-cell" mat-cell *matCellDef="let element">
-                                        {{element.RAMO}}</td>
+                                <ng-container matColumnDef="Ramo">
+                                    <th class="ramo-cell" mat-header-cell *matHeaderCellDef>Ramo</th>
+                                    <td class="ramo-cell" mat-cell *matCellDef="let element">
+                                        {{element.Ramo}}</td>
                                 </ng-container>
                                 <!--<ng-container matColumnDef="SUBCENTRAL">
                                     <th class="area-cell" mat-header-cell *matHeaderCellDef>Sub-Central</th>
@@ -107,27 +108,27 @@
                                     <td class="departamento-cell" mat-cell *matCellDef="let element">
                                         {{element.ESTRUCTURAL}}</td>
                                 </ng-container>!-->
-                                <ng-container matColumnDef="COMERCIAL">
+                                <ng-container matColumnDef="Comercial">
                                     <th class="codigo-cell" mat-header-cell *matHeaderCellDef>Comercial</th>
-                                    <td class="codigo-cell" mat-cell *matCellDef="let element">{{element.COMERCIAL}}
+                                    <td class="codigo-cell" mat-cell *matCellDef="let element">{{element.Comercial}}
                                     </td>
                                 </ng-container>
-                                <ng-container matColumnDef="AGENTE">
-                                    <th class="macroproceso-cell" mat-header-cell *matHeaderCellDef>Agente
+                                <ng-container matColumnDef="Agente">
+                                    <th class="agente-cell" mat-header-cell *matHeaderCellDef>Agente
                                     </th>
-                                    <td class="macroproceso-cell" mat-cell *matCellDef="let element">
-                                        {{element.AGENTE}}</td>
+                                    <td class="agente-cell" mat-cell *matCellDef="let element">
+                                        {{element.Agente}}</td>
                                 </ng-container>
-                                <ng-container matColumnDef="POLIZA">
-                                    <th class="documento-cell" mat-header-cell *matHeaderCellDef>Poliza</th>
-                                    <td class="documento-cell" mat-cell *matCellDef="let element">
-                                        {{element.POLIZA}}
+                                <ng-container matColumnDef="Poliza">
+                                    <th class="poliza-cell" mat-header-cell *matHeaderCellDef>Poliza</th>
+                                    <td class="poliza-cell" mat-cell *matCellDef="let element">
+                                        {{element.Poliza}}
                                     </td>
                                 </ng-container>
-                                <ng-container matColumnDef="COBERTURA">
-                                    <th class="version-cell" mat-header-cell *matHeaderCellDef>Cobertura</th>
-                                    <td class="version-cell" mat-cell *matCellDef="let element">
-                                        {{element.COBERTURA}}</td>
+                                <ng-container matColumnDef="Cobertura">
+                                    <th class="cobertura-cell" mat-header-cell *matHeaderCellDef>Cobertura</th>
+                                    <td class="cobertura-cell" mat-cell *matCellDef="let element">
+                                        {{element.Cobertura}}</td>
                                 </ng-container>
                                 <!--<ng-container matColumnDef="MONEDA">
                                     <th mat-header-cell *matHeaderCellDef class="fecha-creacion-cell">Moneda
@@ -135,17 +136,17 @@
                                     <td mat-cell *matCellDef="let element" class="fecha-creacion-cell">
                                         {{element.MONEDA}}</td>
                                 </ng-container>!-->
-                                <ng-container matColumnDef="FECHA_VALIDEZ">
-                                    <th class="solicitanteact-cell" mat-header-cell *matHeaderCellDef>
+                                <ng-container matColumnDef="IngresoFechaVal">
+                                    <th class="fechaValidez-cell" mat-header-cell *matHeaderCellDef>
                                         Fecha Validez
                                     </th>
-                                    <td class="solicitanteact-cell" mat-cell *matCellDef="let element">
-                                        {{element.FECHA_VALIDEZ}}</td>
+                                    <td class="fechaValidez-cell" mat-cell *matCellDef="let element">
+                                        {{element.IngresoFechaVal}}</td>
                                 </ng-container>
-                                <ng-container matColumnDef="AGENTEDOS">
-                                    <th mat-header-cell *matHeaderCellDef class="fecha-actualizacion-cell">% AGENTE</th>
-                                    <td mat-cell *matCellDef="let element" class="fecha-actualizacion-cell">
-                                        {{element.AGENTEDOS}}
+                                <ng-container matColumnDef="Agentenp">
+                                    <th mat-header-cell *matHeaderCellDef class="agente-cell">% AGENTE</th>
+                                    <td mat-cell *matCellDef="let element" class="agente-cell">
+                                        {{element.Agentenp}}
                                     </td>
                                 </ng-container>
                                 <!--<ng-container matColumnDef="AGENTETRES">
@@ -154,10 +155,10 @@
                                         {{element.AGENTETRES}}
                                     </td>
                                 </ng-container>!-->
-                                <ng-container matColumnDef="RAPPEL_UNO">
-                                    <th mat-header-cell *matHeaderCellDef class="fecha-actualizacion-cell">% RAPPEL</th>
-                                    <td mat-cell *matCellDef="let element" class="fecha-actualizacion-cell">
-                                        {{element.RAPPEL_UNO}}
+                                <ng-container matColumnDef="Rapper">
+                                    <th mat-header-cell *matHeaderCellDef class="rappel">% RAPPEL</th>
+                                    <td mat-cell *matCellDef="let element" class="rappel">
+                                        {{element.Rapper}}
                                     </td>
                                 </ng-container>
                                 <!--<ng-container matColumnDef="RAPPELDOS">
@@ -180,7 +181,6 @@
                                         <div>
                                             No hay información
                                         </div>
-                                        
                                     </td>
                                 </tr>
                             </table>
@@ -202,59 +202,64 @@
                 <form [formGroup]="excepcionNuevoFormGroup">
                     <div class="row">
                         <div class="col-md-3">
-                            <mat-form-field appearance="fill" color="warn">
+                            <mat-form-field  appearance="fill" color="warn">
                             <mat-label>Ramo</mat-label>
-                                <input type="text" matInput formControlName="ramo">
+                                <input type="text" matInput formControlName="ramo" [readonly]="codigoEdicion == 1">
                             </mat-form-field>
                         </div>
                         <div class="col-md-3">
                             <mat-form-field appearance="fill" color="warn">
                             <mat-label>Subcentral</mat-label>
-                                <input type="text" matInput formControlName="subcentral">
+                                <input type="text" matInput formControlName="subcentral" [readonly]="codigoEdicion == 1">
                             </mat-form-field>
                         </div>
                         <div class="col-md-3">
                             <mat-form-field appearance="fill" color="warn">
                             <mat-label>Estructural</mat-label>
-                                <input type="text" matInput formControlName="estructural">
+                                <input type="text" matInput formControlName="estructural" [readonly]="codigoEdicion == 1">
                             </mat-form-field>
                         </div>
                         <div class="col-md-3">
                             <mat-form-field appearance="fill" color="warn">
                             <mat-label>Comecial</mat-label>
-                                <input type="text" matInput formControlName="comercial">
+                                <input type="text" matInput formControlName="comercial" [readonly]="codigoEdicion == 1">
                             </mat-form-field>
                         </div>
                         <div class="col-md-3">
                             <mat-form-field appearance="fill" color="warn">
                             <mat-label>Agente</mat-label>
-                                <input type="text" matInput formControlName="agente">
+                                <input type="text" matInput formControlName="agente" [readonly]="codigoEdicion == 1">
                             </mat-form-field>
                         </div>
                         <div class="col-md-3">
                             <mat-form-field appearance="fill" color="warn">
                             <mat-label>Poliza</mat-label>
-                                <input type="text" matInput formControlName="poliza">
+                                <input type="text" matInput formControlName="poliza"  [readonly]="codigoEdicion == 1">
                             </mat-form-field>
                         </div>
                         <div class="col-md-3">
                             <mat-form-field appearance="fill" color="warn">
                             <mat-label>Cobertura</mat-label>
-                                <input type="text" matInput formControlName="cobertura">
+                                <input type="text" matInput formControlName="cobertura" [readonly]="codigoEdicion == 1">
                             </mat-form-field>
+                            <!--<mat-option *ngFor="let cobertura of listaCobertura"
+                                    [value]="cobertura.COD_COBERTURA">
+                                    {{cobertura.NOM_COBERTURA}}
+                            </mat-option>!-->
                         </div>
                         <div class="col-md-3">
                             <mat-form-field appearance="fill" color="warn">
                             <mat-label>Moneda</mat-label>
-                                <input type="text" matInput formControlName="moneda">
+                                <input type="text" matInput formControlName="moneda" [readonly]="codigoEdicion == 1">
                             </mat-form-field>
                         </div>
                         <div class="col-md-4">
                             <mat-form-field appearance="fill" color="warn">
                                 <mat-label>Fecha</mat-label>
-                                <input matInput [matDatepicker]="picker2" formControlName="ingresoFechaVal">
+                                <input matInput formControlName="ingresoFechaVal" [readonly]="codigoEdicion == 1">
+                                <!--<input matInput [matDatepicker]="picker2" formControlName="ingresoFechaVal" [readonly]="codigoEdicion == 1">
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                <mat-datepicker #picker2></mat-datepicker>
+                                <mat-datepicker #picker2></mat-datepicker> !-->
                             </mat-form-field>
                         </div>
                         <div class="col-md-8">
@@ -354,7 +359,7 @@
                             <p-button (onClick)="grabar()" class="w-100" label="Grabar" icon="pi pi-save"></p-button>
                         </div>
                         <div class="col-md-2">
-                            <p-button (onClick)="clearScreen()" class="w-100" label="Limpiar" icon="pi pi-eraser"></p-button>
+                            <p-button (onClick)="clearScreenModal()" class="w-100" label="Limpiar" icon="pi pi-eraser"></p-button>
                         </div>
                     </div>
                     
@@ -362,6 +367,5 @@
             </div>
         </div>
 </p-dialog>
-
 
 <p-confirmDialog></p-confirmDialog>

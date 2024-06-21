@@ -36,7 +36,7 @@ export class ConsultarComponent implements OnInit, OnDestroy {
   allAreas: string = "TA";
   allDepartamentos: string = 'TD';
 
-  listaProcesos: any;
+  listaProcesos: any; 
   listaMacroprocesos: any;
   listaMacroprocesosFiltrada: any;
   listaTipoDocumento: any;

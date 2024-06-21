@@ -1,23 +1,23 @@
 export interface Comisiones {
-    CODIGO_CIA: number | null | undefined;
-    RAMO: number | null | undefined;
-    SUBCENTRAL: number | null | undefined;
-    ESTRUCTURAL: number | null | undefined;
-    COMERCIAL: number | null | undefined;
-    AGENTE: number | null | undefined;
-    POLIZA: number | null | undefined;
-    COBERTURA: number | null | undefined;
-    MONEDA: number | null | undefined;
-    FECHA_VALIDEZ: string | null | undefined;
-    AGENTEDOS: number | null | undefined;
-    RAPPEL_UNO: number | null | undefined;
-    RAPPEL_DOS: number | null | undefined;
-    ASESOR: number | null | undefined;
-    OBJETO?: string | null | undefined;
-    OBSERVACIONES?: string | null | undefined;
-    USUARIO?: string | null | undefined;
-    FECHA_DOS?: Date | null | undefined;
-    POLIZA_GRUPO?: string | null | undefined;
-    CONTRATO?: string | null | undefined;
+  Ramo: string | null | undefined;
+  Subcentral: string | null | undefined;
+  Estructural: string | null | undefined;
+  Comercial: string | null | undefined;
+  Agente: string | null | undefined;
+  Poliza: string | null | undefined;
+  Cobertura: string | null | undefined;
+  Moneda: string | null | undefined;
+    IngresoFechaVal: string | null | undefined;
+    Agentenp: string | null | undefined;
+    Agentecartera?: string | null | undefined;
+    Rapper?: string | null | undefined;
+    RapperCartera?: string | null | undefined;
+    Asesor?: string | null | undefined;
+    AsesorCartera?: string | null | undefined;
+    Objeto?: string | null | undefined;
+    ObjetoAnulacion?: string | null | undefined;
+    Observaciones?: string | null | undefined;
+    PolizaGrupo?: string | null | undefined;
+    ContratoPoliza?: string | null | undefined;
 
   }
